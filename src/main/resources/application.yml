@@ -1,0 +1,18 @@
+bot:
+  configuration:
+    token: ENC(lPjw19R6VlhroE02G6ozwvHBvB+D4wvCE3dQfyIJiQB5walRbU2HFN4omabXKbw5+5PqDKCwwt5J2upaJ4rfpYfqS4piTmMtv9DOT8VUq9Q=)
+    username: OnTime2023Bot
+spring:
+  data:
+    redis:
+      host: localhost
+      port: 6379
+event:
+  notification:
+    api:
+      url: http://localhost:8080/api/v1
+      clientId: telegram-bot-client
+      clientSecret: ENC(QUpWtaEtVzzB7K7Kbb0K14TsJtxmBWbTCSpbfdhkzFynqPWGViBVW1FN4yrR7fRL)
+server:
+  port: 8081
+api.key: ENC(LKDpXailriE+LT1j26Jp5WhAIMuLasTDQLmUy1BVp8cgjB2T44hJi4SicgAxDdSc)
