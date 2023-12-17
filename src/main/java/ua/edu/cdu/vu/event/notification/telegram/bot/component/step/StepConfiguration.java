@@ -20,8 +20,8 @@ public class StepConfiguration {
     public static final int CREATE_EVENT_FLOW_ID = 1;
 
     @Bean
-    public Step updateEventNameForCreateStep(TelegramSenderService telegramSenderService) {
-        return new UpdateEventNameStep(telegramSenderService, CREATE_EVENT_FLOW_ID, 1);
+    public Step updateEventNameForCreateStep(TelegramSenderService telegramSenderService, Clock clock) {
+        return new UpdateEventNameStep(telegramSenderService, clock, CREATE_EVENT_FLOW_ID, 1);
     }
 
     @Bean

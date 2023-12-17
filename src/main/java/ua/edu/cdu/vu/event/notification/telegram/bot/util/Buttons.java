@@ -9,6 +9,8 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.Keyboard
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 import ua.edu.cdu.vu.event.notification.telegram.bot.model.TimeLabel;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,6 +19,7 @@ import static java.lang.String.valueOf;
 import static org.apache.commons.lang3.StringUtils.SPACE;
 import static ua.edu.cdu.vu.event.notification.telegram.bot.component.command.BotCommand.DELETE;
 import static ua.edu.cdu.vu.event.notification.telegram.bot.component.command.BotCommand.UPDATE;
+import static ua.edu.cdu.vu.event.notification.telegram.bot.util.DateTimeUtils.format;
 
 @UtilityClass
 public class Buttons {
@@ -27,6 +30,10 @@ public class Buttons {
         return KeyboardButton.builder()
                 .text(text)
                 .build();
+    }
+
+    public static KeyboardButton button(LocalDateTime localDateTime) {
+        return button(format(localDateTime));
     }
 
     public static InlineKeyboardButton button(String text, String data) {
@@ -61,6 +68,20 @@ public class Buttons {
         rows.add(new KeyboardRow(List.of(button(COMPLETE))));
 
         return keyboard(rows);
+    }
+
+    public static ReplyKeyboardMarkup dateTimeKeyboard(LocalDate localDate) {
+        LocalDateTime localDateTime = localDate.atStartOfDay();
+        return keyboard(List.of(
+                new KeyboardRow(List.of(button(localDateTime.plusDays(1)), button(localDateTime.plusDays(1).plusHours(3)))),
+                new KeyboardRow(List.of(button(localDateTime.plusDays(1).plusHours(6)), button(localDateTime.plusDays(1).plusHours(9)))),
+                new KeyboardRow(List.of(button(localDateTime.plusDays(1).plusHours(12)), button(localDateTime.plusDays(1).plusHours(15)))),
+                new KeyboardRow(List.of(button(localDateTime.plusDays(1).plusHours(18)), button(localDateTime.plusDays(1).plusHours(21)))),
+                new KeyboardRow(List.of(button(localDateTime.plusDays(2)), button(localDateTime.plusDays(2).plusHours(6)))),
+                new KeyboardRow(List.of(button(localDateTime.plusDays(2).plusHours(12)), button(localDateTime.plusDays(2).plusHours(18)))),
+                new KeyboardRow(List.of(button(localDateTime.plusDays(3)), button(localDateTime.plusDays(3).plusHours(12)))),
+                new KeyboardRow(List.of(button(localDateTime.plusDays(4)), button(localDateTime.plusDays(5))))
+        ));
     }
 
     private InlineKeyboardMarkup keyboard(InlineKeyboardButton... buttons) {
