@@ -67,7 +67,7 @@ public class Buttons {
                 .collect(Collectors.toList());
         rows.add(new KeyboardRow(List.of(button(COMPLETE))));
 
-        return keyboard(rows);
+        return keyboard(rows, true);
     }
 
     public static ReplyKeyboardMarkup dateTimeKeyboard(LocalDate localDate) {
@@ -81,7 +81,7 @@ public class Buttons {
                 new KeyboardRow(List.of(button(localDateTime.plusDays(2).plusHours(12)), button(localDateTime.plusDays(2).plusHours(18)))),
                 new KeyboardRow(List.of(button(localDateTime.plusDays(3)), button(localDateTime.plusDays(3).plusHours(12)))),
                 new KeyboardRow(List.of(button(localDateTime.plusDays(4)), button(localDateTime.plusDays(5))))
-        ));
+        ), false);
     }
 
     private InlineKeyboardMarkup keyboard(InlineKeyboardButton... buttons) {
@@ -90,9 +90,9 @@ public class Buttons {
                 .build();
     }
 
-    private static ReplyKeyboardMarkup keyboard(List<KeyboardRow> rows) {
+    private static ReplyKeyboardMarkup keyboard(List<KeyboardRow> rows, boolean isPersistent) {
         return ReplyKeyboardMarkup.builder()
-                .isPersistent(true)
+                .isPersistent(isPersistent)
                 .resizeKeyboard(true)
                 .keyboard(rows)
                 .build();
