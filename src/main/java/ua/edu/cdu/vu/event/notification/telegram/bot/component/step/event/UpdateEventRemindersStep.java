@@ -23,7 +23,6 @@ import java.util.Optional;
 import java.util.Set;
 
 import static ua.edu.cdu.vu.event.notification.telegram.bot.util.Buttons.eventKeyboard;
-import static ua.edu.cdu.vu.event.notification.telegram.bot.util.EventConstants.EVENT_DATETIME;
 import static ua.edu.cdu.vu.event.notification.telegram.bot.util.EventConstants.EVENT_REMINDERS;
 
 @RequiredArgsConstructor
