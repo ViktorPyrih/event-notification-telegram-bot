@@ -32,7 +32,7 @@ public abstract class EventMapper {
                         .orElse(null))
                 .key(String.valueOf(chatId))
                 .name(userState.getDataEntry(EVENT_NAME))
-                .notes(userState.getDataEntry(EVENT_NOTES, null))
+                .notes(userState.getDataEntry(EVENT_NOTES))
                 .dateTime(ZonedDateTime.of(DateTimeUtils.parse(userState.getDataEntry(EVENT_DATETIME)), ZoneOffset.UTC))
                 .reminders(objectMapper.readValue(userState.getDataEntry(EVENT_REMINDERS), new TypeReference<>() {}))
                 .build();

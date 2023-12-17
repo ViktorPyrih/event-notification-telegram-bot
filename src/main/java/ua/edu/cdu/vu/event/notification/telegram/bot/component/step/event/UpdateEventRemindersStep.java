@@ -23,6 +23,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import static ua.edu.cdu.vu.event.notification.telegram.bot.util.Buttons.eventKeyboard;
+import static ua.edu.cdu.vu.event.notification.telegram.bot.util.EventConstants.EVENT_DATETIME;
 import static ua.edu.cdu.vu.event.notification.telegram.bot.util.EventConstants.EVENT_REMINDERS;
 
 @RequiredArgsConstructor
@@ -30,7 +31,7 @@ public class UpdateEventRemindersStep implements Step {
 
     private static final String REMINDER_ADDED = "Reminder: '%s' added";
     private static final String EVENT_CREATED_UPDATED = "Event with id: '%d' created/updated";
-    private static final String RECREATE_EVENT = "Please, recreate your event";
+    private static final String RECREATE_EVENT = "Please, recreate your event (enter '-', if data should remain the same). Enter event name:";
     private static final String REMINDER_IS_IN_WRONG_FORMAT = "Error. Reminder is in a wrong format";
 
     private static final String EMPTY_LIST = "[]";
@@ -58,7 +59,7 @@ public class UpdateEventRemindersStep implements Step {
     @Override
     @SneakyThrows
     public Optional<UserState> process(Update update, UserState userState) {
-        if (COMPLETE.equals(update.getMessage().getText())) {
+        if (COMPLETE.equalsIgnoreCase(update.getMessage().getText())) {
             return processCompleteCommand(update, userState);
         }
 
@@ -75,6 +76,7 @@ public class UpdateEventRemindersStep implements Step {
         } catch (EventNotValidException e) {
             telegramSenderService.send(chatId, e.getMessage());
             telegramSenderService.send(chatId, RECREATE_EVENT);
+            userState.removeDataEntry(EVENT_REMINDERS);
 
             return Optional.of(userState.firstStep());
         } catch (EventNotFoundException e) {
@@ -95,11 +97,11 @@ public class UpdateEventRemindersStep implements Step {
             var reminders = objectMapper.readValue(remindersJson, new TypeReference<Set<Reminder>>() {});
             reminders.add(reminderMapper.convertToDomain(timeLabel));
 
-            telegramSenderService.send(chatId, REMINDER_ADDED.formatted(timeLabel.getName()));
+            telegramSenderService.send(chatId, REMINDER_ADDED.formatted(timeLabel.getName()), false);
 
             return Optional.of(userState.addDataEntry(EVENT_REMINDERS, objectMapper.writeValueAsString(reminders)));
         } catch (IllegalArgumentException e) {
-            telegramSenderService.send(chatId, REMINDER_IS_IN_WRONG_FORMAT);
+            telegramSenderService.send(chatId, REMINDER_IS_IN_WRONG_FORMAT, false);
 
             return Optional.of(userState);
         }

@@ -50,11 +50,7 @@ public class UserState {
     }
 
     public String getDataEntry(String key) {
-        return findDataEntry(key).orElseThrow();
-    }
-
-    public String getDataEntry(String key, String defaultValue) {
-        return findDataEntry(key).orElse(defaultValue);
+        return findDataEntry(key).orElse(null);
     }
 
     public Optional<String> findDataEntry(String key) {
@@ -63,5 +59,13 @@ public class UserState {
         }
 
         return Optional.ofNullable(data.get(key));
+    }
+
+    public void removeDataEntry(String key) {
+        if (isNull(data)) {
+            return;
+        }
+
+        data.remove(key);
     }
 }

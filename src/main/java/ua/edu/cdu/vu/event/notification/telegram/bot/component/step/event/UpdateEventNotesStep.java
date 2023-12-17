@@ -15,7 +15,7 @@ import static ua.edu.cdu.vu.event.notification.telegram.bot.util.EventConstants.
 @RequiredArgsConstructor
 public class UpdateEventNotesStep implements Step {
 
-    private static final String CHOOSE_EVENT_REMINDERS = "Choose event reminders, please:";
+    private static final String CHOOSE_EVENT_REMINDERS = "Choose event reminders (5m, 1d etc.), please:";
 
     private final TelegramSenderService telegramSenderService;
 

@@ -19,7 +19,7 @@ import static ua.edu.cdu.vu.event.notification.telegram.bot.util.TelegramBotCons
 @RequiredArgsConstructor
 public class UpdateEventDateTimeStep implements Step {
 
-    private static final String EVENT_DATE_TIME_IS_NOT_VALID = "Event datetime is not valid. Please, try again";
+    private static final String EVENT_DATE_TIME_IS_NOT_VALID = "Event datetime is not valid or is in the past. Please, try again";
     private static final String ENTER_EVENT_NOTES = "Enter event notes (-, if these are missing):";
 
     private final TelegramSenderService telegramSenderService;
