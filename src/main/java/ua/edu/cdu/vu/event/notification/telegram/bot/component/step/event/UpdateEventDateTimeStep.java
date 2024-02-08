@@ -10,9 +10,11 @@ import ua.edu.cdu.vu.event.notification.telegram.bot.util.DateTimeUtils;
 
 import java.time.Clock;
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.Optional;
 
+import static ua.edu.cdu.vu.event.notification.telegram.bot.util.Buttons.dateTimeKeyboard;
 import static ua.edu.cdu.vu.event.notification.telegram.bot.util.EventConstants.EVENT_DATETIME;
 import static ua.edu.cdu.vu.event.notification.telegram.bot.util.TelegramBotConstants.NO_DATA;
 
@@ -45,7 +47,7 @@ public class UpdateEventDateTimeStep implements Step {
             telegramSenderService.send(chatId, ENTER_EVENT_NOTES);
             return Optional.of(userState.nextStep().addDataEntry(EVENT_DATETIME, update.getMessage().getText()));
         }
-        telegramSenderService.send(chatId, EVENT_DATE_TIME_IS_NOT_VALID);
+        telegramSenderService.send(chatId, EVENT_DATE_TIME_IS_NOT_VALID, dateTimeKeyboard(ZonedDateTime.now(clock)));
 
         return Optional.of(userState);
     }

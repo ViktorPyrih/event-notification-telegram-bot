@@ -37,7 +37,7 @@ public class UpdateEventNameStep implements Step {
 
     @Override
     public Optional<UserState> process(Update update, UserState userState) throws TelegramApiException {
-        telegramSenderService.send(getChatId(update), ENTER_EVENT_DATE_TIME, dateTimeKeyboard(ZonedDateTime.now(clock).toLocalDate()));
+        telegramSenderService.send(getChatId(update), ENTER_EVENT_DATE_TIME, dateTimeKeyboard(ZonedDateTime.now(clock)));
         return Optional.of(userState.nextStep().addDataEntry(EVENT_NAME, update.getMessage().getText()));
     }
 }

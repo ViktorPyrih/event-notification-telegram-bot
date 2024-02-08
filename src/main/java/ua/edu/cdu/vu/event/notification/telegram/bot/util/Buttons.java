@@ -9,8 +9,8 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.Keyboard
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 import ua.edu.cdu.vu.event.notification.telegram.bot.model.TimeLabel;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -70,17 +70,24 @@ public class Buttons {
         return keyboard(rows, true);
     }
 
-    public static ReplyKeyboardMarkup dateTimeKeyboard(LocalDate localDate) {
-        LocalDateTime localDateTime = localDate.atStartOfDay();
+    public static ReplyKeyboardMarkup dateTimeKeyboard(ZonedDateTime dateTime) {
+        LocalDateTime localDateTime = dateTime.toLocalDateTime();
+        LocalDateTime localDateTimeAtStartOfDay = dateTime.toLocalDate().atStartOfDay();
         return keyboard(List.of(
-                new KeyboardRow(List.of(button(localDateTime.plusDays(1)), button(localDateTime.plusDays(1).plusHours(3)))),
-                new KeyboardRow(List.of(button(localDateTime.plusDays(1).plusHours(6)), button(localDateTime.plusDays(1).plusHours(9)))),
-                new KeyboardRow(List.of(button(localDateTime.plusDays(1).plusHours(12)), button(localDateTime.plusDays(1).plusHours(15)))),
-                new KeyboardRow(List.of(button(localDateTime.plusDays(1).plusHours(18)), button(localDateTime.plusDays(1).plusHours(21)))),
-                new KeyboardRow(List.of(button(localDateTime.plusDays(2)), button(localDateTime.plusDays(2).plusHours(6)))),
-                new KeyboardRow(List.of(button(localDateTime.plusDays(2).plusHours(12)), button(localDateTime.plusDays(2).plusHours(18)))),
-                new KeyboardRow(List.of(button(localDateTime.plusDays(3)), button(localDateTime.plusDays(3).plusHours(12)))),
-                new KeyboardRow(List.of(button(localDateTime.plusDays(4)), button(localDateTime.plusDays(5))))
+                new KeyboardRow(List.of(button(localDateTime.plusMinutes(5)), button(localDateTime.plusMinutes(10)))),
+                new KeyboardRow(List.of(button(localDateTime.plusMinutes(15)), button(localDateTime.plusMinutes(30)))),
+                new KeyboardRow(List.of(button(localDateTime.plusMinutes(45)), button(localDateTime.plusHours(1)))),
+                new KeyboardRow(List.of(button(localDateTime.plusHours(2)), button(localDateTime.plusHours(3)))),
+                new KeyboardRow(List.of(button(localDateTime.plusHours(6)), button(localDateTime.plusHours(9)))),
+                new KeyboardRow(List.of(button(localDateTime.plusHours(12)), button(localDateTime.plusHours(18)))),
+                new KeyboardRow(List.of(button(localDateTimeAtStartOfDay.plusDays(1)), button(localDateTimeAtStartOfDay.plusDays(1).plusHours(3)))),
+                new KeyboardRow(List.of(button(localDateTimeAtStartOfDay.plusDays(1).plusHours(6)), button(localDateTimeAtStartOfDay.plusDays(1).plusHours(9)))),
+                new KeyboardRow(List.of(button(localDateTimeAtStartOfDay.plusDays(1).plusHours(12)), button(localDateTimeAtStartOfDay.plusDays(1).plusHours(15)))),
+                new KeyboardRow(List.of(button(localDateTimeAtStartOfDay.plusDays(1).plusHours(18)), button(localDateTimeAtStartOfDay.plusDays(1).plusHours(21)))),
+                new KeyboardRow(List.of(button(localDateTimeAtStartOfDay.plusDays(2)), button(localDateTimeAtStartOfDay.plusDays(2).plusHours(6)))),
+                new KeyboardRow(List.of(button(localDateTimeAtStartOfDay.plusDays(2).plusHours(12)), button(localDateTimeAtStartOfDay.plusDays(2).plusHours(18)))),
+                new KeyboardRow(List.of(button(localDateTimeAtStartOfDay.plusDays(3)), button(localDateTimeAtStartOfDay.plusDays(3).plusHours(12)))),
+                new KeyboardRow(List.of(button(localDateTimeAtStartOfDay.plusDays(4)), button(localDateTimeAtStartOfDay.plusDays(5))))
         ), false);
     }
 
