@@ -1,6 +1,5 @@
 package ua.edu.cdu.vu.event.notification.telegram.bot;
 
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -11,7 +10,6 @@ import ua.edu.cdu.vu.event.notification.telegram.bot.configuration.BotConfigurat
 import ua.edu.cdu.vu.event.notification.telegram.bot.service.TelegramBotService;
 
 @SpringBootApplication
-@RequiredArgsConstructor
 public class EventNotificationTelegramBotApplication {
 
     public static void main(String[] args) {
